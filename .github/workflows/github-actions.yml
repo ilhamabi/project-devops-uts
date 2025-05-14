@@ -18,6 +18,16 @@ jobs:
         with:
           node-version: '16'
 
+      - name: Generate package.json
+        run: |
+          echo '{
+            "name": "demo-ci",
+            "version": "1.0.0",
+            "scripts": {
+              "test": "echo \"Running test...\" && exit 0"
+            }
+          }' > package.json
+
       - name: Install dependencies
         run: npm install
 
