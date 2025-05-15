@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  test:
+  build-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -41,14 +41,14 @@ jobs:
         run: npm test
   # Job CD: deploy ke GitHub Pages (bisa diganti FTP/SCP)
   deploy:
-    needs: test
+    needs: build-test
     runs-on: ubuntu-latest
+    if: success()
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Deploy to GitHub Pages
+      - uses: actions/checkout@v3
+      - name: Deploy ke GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
+          publish_branch: deploy-test
