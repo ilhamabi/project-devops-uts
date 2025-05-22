@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8082        # Ganti port 80 dengan port yang tidak digunakan, seperti 8080
+      targetPort: 8082   # Port aplikasi yang dijalankan di dalam container
+  selector:
+    app: myapp
+
